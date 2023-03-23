@@ -1,5 +1,9 @@
 import emoji2HTMLEntity from './emoji2htmlCode.js';
 
+if (location.pathname.indexOf("index.html") >= 0) {
+    location.href = location.pathname.replace(/index.html.*/, "")
+}
+
 window.onload = e => {
     const jsonUrl = location.pathname + "assets/emojilist.json";
 
