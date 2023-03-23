@@ -2,7 +2,6 @@ import emoji2HTMLEntity from './emoji2htmlCode.js';
 
 window.onload = e => {
     var dirs = location.pathname.split("/");
-    console.debug(dirs);
     const jsonUrl = dirs[dirs.length -2] + "/assets/emojilist.json";
 
     // loading emojis
