@@ -1,12 +1,13 @@
 import emoji2HTMLEntity from './emoji2htmlCode.js';
 
 window.onload = e => {
-    var dirs = location.href.split("/");
+    var dirs = location.pathname.split("/");
+    console.debug(dirs);
     const jsonUrl = dirs[dirs.length -2] + "/assets/emojilist.json";
 
     // loading emojis
     fetch(jsonUrl)
-    .then( response => response.json())
+    .then(response => response.json())
     .then(emojis => {
         // Set emoji categories as search candidates.
         const items = emojis.filter(
