@@ -12,10 +12,10 @@ AGPL-3.0
 
 ### emojilist.json
 
-copyright Copyright Mathias Bynens <https://mathiasbynens.be/>\
+Copyright Mathias Bynens <https://mathiasbynens.be/>\
 license the AGPL-3.0
 
 ### Emoji regular expression
 
-copyright Copyright Mathias Bynens <https://mathiasbynens.be/>\
+Copyright Mathias Bynens <https://mathiasbynens.be/>\
 license the MIT license
