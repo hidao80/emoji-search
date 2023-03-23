@@ -1,11 +1,9 @@
-import emoji2HTMLEntity from './emoji2htmlCode.js';
-
 if (location.pathname.indexOf("index.html") >= 0) {
     location.href = location.pathname.replace(/index.html.*/, "")
 }
 
 window.onload = e => {
-    const jsonUrl = location.pathname + "assets/emojilist.json";
+    const jsonUrl = location.pathname + "assets/emojilist_merged.json";
 
     // loading emojis
     fetch(jsonUrl)
@@ -30,6 +28,7 @@ window.onload = e => {
             containerDiv.classList.add("item");
             containerDiv.style = "margin:5px;width:calc(12.5% - 6px)";
             containerDiv.dataset.keywords = emoji.keywords.join(",");
+            containerDiv.dataset.name = emoji.name;
 
             const emojiDiv = document.createElement("div");
             emojiDiv.textContent = emoji.char;
@@ -37,15 +36,21 @@ window.onload = e => {
             const nameDiv = document.createElement("div");
             nameDiv.textContent = emoji.name;
 
+            const codePoint = emoji.char.codePointAt(0).toString(16);
+
             const htmlCodeDiv = document.createElement("div");
-            htmlCodeDiv.textContent = emoji2HTMLEntity(emoji.char);
+            htmlCodeDiv.textContent = `&#x${codePoint};`;
+
+            const utfHexDiv = document.createElement("div");
+            utfHexDiv.textContent = `\\u{${codePoint}}`;
 
             const hexDiv = document.createElement("div");
-            hexDiv.textContent = emoji2HTMLEntity(emoji.char).replace(/(&#x|;)/ig, "");
+            hexDiv.textContent = codePoint;
 
             containerDiv.appendChild(emojiDiv);
             containerDiv.appendChild(nameDiv);
             containerDiv.appendChild(htmlCodeDiv);
+            containerDiv.appendChild(utfHexDiv);
             containerDiv.appendChild(hexDiv);
 
             container.appendChild(containerDiv);
@@ -57,14 +62,17 @@ window.onload = e => {
 
     // Search button action
     searchButton.addEventListener('click', e => {
-        const query = document.querySelector('#emojiSearch').value;
+        const queries = document.querySelector('#emojiSearch').value.split(/[\x20\u3000]/);
 
         const items = document.querySelectorAll(".item");
         for (const item of items) {
-            if (item.dataset.keywords.indexOf(query) == -1) {
-                item.classList.add("d-none");
-            } else {
-                item.classList.remove("d-none");
+            for (const query of queries) {
+                if (item.dataset.keywords.indexOf(query) == -1 && item.dataset.name.indexOf(query) == -1) {
+                    item.classList.add("d-none");
+                    break;
+                } else {
+                    item.classList.remove("d-none");
+                }
             }
         }
     });
