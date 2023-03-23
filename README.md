@@ -14,8 +14,3 @@ AGPL-3.0
 
 Copyright Mathias Bynens <https://mathiasbynens.be/>\
 license the AGPL-3.0
-
-### Emoji regular expression
-
-Copyright Mathias Bynens <https://mathiasbynens.be/>\
-license the MIT license
