@@ -1,7 +1,7 @@
 import emoji2HTMLEntity from './emoji2htmlCode.js';
 
 window.onload = e => {
-    const jsonUrl = locaiton.pathname + "assets/emojilist.json";
+    const jsonUrl = location.pathname + "assets/emojilist.json";
 
     // loading emojis
     fetch(jsonUrl)
